@@ -68,8 +68,7 @@ function mainMenu(person, people) {
             let personInfo = displayPerson(person[0]);
             alert(personInfo);
             break;
-        case "family":
-            //! TODO #2: Declare a findPersonFamily function //////////////////////////////////////////
+        case "family":           
             // HINT: Look for a people-collection stringifier utility function to help
             let personFamily = findPersonFamily(person[0], people);
             alert(personFamily);
@@ -191,6 +190,7 @@ function chars(input) {
 
 //////////////////////////////////////////* End Of Starter Code *//////////////////////////////////////////
 // Any additional functions can be written below this line 👇. Happy Coding! 😁
+//todo Begining of the findPersonFamily() function
 function findPersonFamily(person, people){
 	//^Need list of person's parents
 	let parentsList = people.filter(function(el) {
@@ -200,6 +200,7 @@ function findPersonFamily(person, people){
 			return false;
 		}
 	})
+
 	//^Need list of person's siblings
 	let siblingsList = people.filter(function(el) {
 		if(el.parents.includes(person.parents)) {
@@ -208,6 +209,7 @@ function findPersonFamily(person, people){
 			return false;
 		}
 	})
+
 	//^Need person's spouse
 	let spouse = people.filter(function(el) {
 		if(el.id === (person.currentSpouse)) {
@@ -216,16 +218,52 @@ function findPersonFamily(person, people){
 			return false;
 		}
 	})
+
 	//^Need to use the map() create a new array of family members
 	let membersOfFamily = spouse.map(function(el) {
 		return `Spouse: ${el.firstName} ${el.lastName}\n`;
 	})
+
 	membersOfFamily.push(siblingsList.map(function(el) {
 		return `Sibiling(s): ${el.firstName} ${el.lastName}\n`;
 	}))
+
 	membersOfFamily.push(parentsList.map(function(el) {
 		return `Parent(s): ${el.firstName} ${el.lastName}`
 	}))
+
 	return membersOfFamily.join('')
 }
-// end of findPersonFamily()
+//todo end of findPersonFamily() function
+
+//~Begining of the findPersonDescendants() function
+function findPersonDescendants(person, people){
+	//!Need an empty [] for childern
+	let childern = [];
+	//!Need an empty [] for grandchildren 
+	let grandChildren = [];
+
+	childern = people.filter(function(el) {
+		if(el.parents.includes(child.id)) {
+			return true;
+		} else {
+			return false;
+		}
+	})
+
+	childern.forEach(function(child) {
+		grandChildren = (people.filter(function(el) {
+			if(el.parents.includes(child.id)) {
+				return true;
+			} else {
+				return false;
+			}
+		}))
+	})
+
+	let descendants = childern.concat(grandChildren)
+	return descendants.map(function(el) {
+		return `${el.firstName} ${el.lastName}\n`
+	}).join('')
+}
+//~End of the findPersonsDescendants() function
