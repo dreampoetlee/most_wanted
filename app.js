@@ -64,7 +64,6 @@ function mainMenu(person, people) {
     // Routes our application based on the user's input
     switch (displayOption) {
         case "info":
-            //! TODO #1: Utilize the displayPerson function //////////////////////////////////////////
             // HINT: Look for a person-object stringifier utility function to help
             let personInfo = displayPerson(person[0]);
             alert(personInfo);
@@ -148,7 +147,7 @@ function displayPerson(person) {
     personInfo += `Occupation: ${person.occupation}\n`;
     personInfo += `Parent's PID: ${person.parents}\n`;
     personInfo += `Spouse's PID: ${person.currentSpouse}\n`;
-    //! TODO #1a: finish getting the rest of the information to display //////////////////////////////////////////
+
     alert(personInfo);
 }
 // End of displayPerson()
@@ -192,3 +191,41 @@ function chars(input) {
 
 //////////////////////////////////////////* End Of Starter Code *//////////////////////////////////////////
 // Any additional functions can be written below this line 👇. Happy Coding! 😁
+function findPersonFamily(person, people){
+	//^Need list of person's parents
+	let parentsList = people.filter(function(el) {
+		if(person.parents.includes(el.id)) {
+			return true;
+		} else {
+			return false;
+		}
+	})
+	//^Need list of person's siblings
+	let siblingsList = people.filter(function(el) {
+		if(el.parents.includes(person.parents)) {
+			return true;
+		} else {
+			return false;
+		}
+	})
+	//^Need person's spouse
+	let spouse = people.filter(function(el) {
+		if(el.id === (person.currentSpouse)) {
+			return true;
+		} else {
+			return false;
+		}
+	})
+	//^Need to use the map() create a new array of family members
+	let membersOfFamily = spouse.map(function(el) {
+		return `Spouse: ${el.firstName} ${el.lastName}\n`;
+	})
+	membersOfFamily.push(siblingsList.map(function(el) {
+		return `Sibiling(s): ${el.firstName} ${el.lastName}\n`;
+	}))
+	membersOfFamily.push(parentsList.map(function(el) {
+		return `Parent(s): ${el.firstName} ${el.lastName}`
+	}))
+	return membersOfFamily.join('')
+}
+// end of findPersonFamily()
