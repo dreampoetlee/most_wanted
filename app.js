@@ -339,3 +339,41 @@ function pickFromOptions(people) {
 		}
 	})
 }
+
+//*Need a list of the various traits to filter by and each trait should have it's own function
+function filterGender(variousTraits) {
+	let inputGender = prompt('Input Gender').toLowerCase();
+	let filteredList = variousTraits.filter(function(el) {
+		if(el.gender === inputGender){
+			return true;
+		} else {
+			return false;
+		}
+	})
+	return filteredList
+}
+
+function filterDOB(variousTraits) {
+	let dobInput = prompt('Input DOB').toLowerCase();
+	let filteredList = variousTraits.filter(function(el) {
+		if (el.dob === dobInput) {
+			return true;
+		} else {
+			return false;
+		}
+	})
+	return filteredList
+}
+
+function filterHeight(variousTraits) {
+	let inputHeight = prompt('Input Height').toLowerCase();
+	let filteredList = variousTraits.filter(function(el) {
+		if (el.height === inputHeight) {
+			return true;
+		} else {
+			return false;
+		}
+	})
+	return filteredList
+}
+
