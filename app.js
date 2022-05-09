@@ -74,7 +74,6 @@ function mainMenu(person, people) {
             alert(personFamily);
             break;
         case "descendants":
-            //! TODO #3: Declare a findPersonDescendants function //////////////////////////////////////////
             // HINT: Review recursion lecture + demo for bonus user story
             let personDescendants = findPersonDescendants(person[0], people);
             alert(personDescendants);
@@ -232,7 +231,7 @@ function findPersonFamily(person, people){
 		return `Parent(s): ${el.firstName} ${el.lastName}`
 	}))
 
-	return membersOfFamily.join('')
+	return membersOfFamily.join(' ')
 }
 //todo end of findPersonFamily() function
 
@@ -244,16 +243,16 @@ function findPersonDescendants(person, people){
 	let grandChildren = [];
 
 	childern = people.filter(function(el) {
-		if(el.parents.includes(child.id)) {
+		if(el.parents.includes(childern.id)) {
 			return true;
 		} else {
 			return false;
 		}
 	})
 
-	childern.forEach(function(child) {
+	childern.forEach(function(childern) {
 		grandChildren = (people.filter(function(el) {
-			if(el.parents.includes(child.id)) {
+			if(el.parents.includes(childern.id)) {
 				return true;
 			} else {
 				return false;
@@ -267,3 +266,25 @@ function findPersonDescendants(person, people){
 	}).join('')
 }
 //~End of the findPersonsDescendants() function
+
+//todo Begining of the search by traits group
+function listOfTraits(differentTraits){
+	let traitsList = []
+	for (let i = 0; i < differentTraits; i++) {
+		traitsList.push(prompt(`Please enter trait ${differentTraits}`))
+	}
+	return traitsList
+}
+
+function searchByTraits(people) {
+	let traitSelector = prompt(`Are you searching by one or more traits? Type 'single' or 'multiple`)
+	traitSelector.toLowerCase()
+	if(traitSelector === 'single') {
+		return individualTraits(people)
+	} else if (traitSelector === 'multiple') {
+		return traitMenu(people)
+	} else {
+		alert('Invalid input, please try again')
+		return searchByTraits(people)
+	}
+}
