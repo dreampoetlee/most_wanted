@@ -377,3 +377,38 @@ function filterHeight(variousTraits) {
 	return filteredList
 }
 
+function filterWeight(variousTraits) {
+	let inputWeight = prompt('Input Weight').toLowerCase();
+	let filteredList = variousTraits.filter(function(el) {
+		if (el.weight === inputWeight) {
+			return true;
+		} else {
+			return false;
+		}
+	})
+	return filteredList
+}
+
+function filterEyeColor(variousTraits) {
+	let inputEyeColor = prompt('Input Eye Color').toLowerCase();
+	let filteredList = variousTraits.filter(function(el) {
+		if (el.eyecolor === inputEyeColor) {
+			return true;
+		} else {
+			return false;
+		}
+	})
+	return filteredList
+}
+
+function filterOccupation(variousTraits) {
+	let inputOccupation = prompt('Input Occupation').toLowerCase();
+	let filteredList = variousTraits.filter(function(el) {
+		if (el.occupation === inputOccupation) {
+			return true;
+		} else {
+			return false;
+		}
+	})
+	return filteredList
+}
