@@ -275,7 +275,7 @@ function listOfTraits(differentTraits){
 	}
 	return traitsList
 }
-
+// ?Need to ask the user if they're gonna search by single or multipe traits
 function searchByTraits(people) {
 	let traitSelector = prompt(`Are you searching by one or more traits? Type 'single' or 'multiple`)
 	traitSelector.toLowerCase()
@@ -287,4 +287,55 @@ function searchByTraits(people) {
 		alert('Invalid input, please try again')
 		return searchByTraits(people)
 	}
+}
+
+//?Need to create a menu list of the various traits
+function traitMenu(people) {
+	let chosenTrait = people;
+	let filterAgain = true;
+	let optionCounter = 0;
+	while (filterAgain === true) {
+		let filterStatment = prompt(`You have chosen to filter by multiple propertites, \n Please select the various options that you would like to filter for one at a time. \n Filter Options: "Gender", "DOB", "Height", "Weight", "Eye Color", "Occupation", "Submit" `);
+
+		switch(filterStatment) {
+			case 'gender':
+				chosenTrait = filterGender(chosenTrait)
+				break;
+			case 'dob':
+				chosenTrait = filterDOB(chosenTrait)
+				break;
+			case 'height':
+				chosenTrait = filterHeight(chosenTrait)
+				break;
+			case 'weight':
+				chosenTrait = filterWeight(chosenTrait)
+				break;
+			case 'eye color':
+				chosenTrait = filterEyeColor(chosenTrait)
+				break;
+			case 'occupation':
+				chosenTrait = filterOccupation(chosenTrait)
+				break;
+			case 'submit':
+				filterAgain = false
+				break;
+		}
+	}
+	return pickFromOptions(chosenTrait)
+}
+
+function pickFromOptions(people) {
+	let personSelected = prompt(
+		`Type the first name of the person that you're looking for from the given options:\n If empty, no person was found \n` +
+		people.map(function(person) {
+			return `${person.firstName} ${person.lastName}`;
+		}).join('\n')
+	);
+	return people.filter(function(el) {
+		if (el.firstName === personSelected) {
+			return true;
+		} else {
+			return false;
+		}
+	})
 }
