@@ -412,3 +412,24 @@ function filterOccupation(variousTraits) {
 	})
 	return filteredList
 }
+
+function individualTraits(people) {
+	let listedTrait = prompt('Please input the trait that you would like to search by: ');
+	listedTrait.toLowerCase()
+	let peopleWithTrait = people.filter(function(el) {
+		if(
+			el.gender === listedTrait ||
+			el.dob === listedTrait ||
+			el.height === listedTrait ||
+			el.weight === listedTrait ||
+			el.eyecolor === listedTrait ||
+			el.occupation === listedTrait
+		) {
+			return true;
+		} else {
+			return false;
+		}
+	})
+	return pickFromOptions(peopleWithTrait);
+}
+//todo End of the search by traits group
